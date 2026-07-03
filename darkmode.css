@@ -1,0 +1,48 @@
+/* ============================================================
+   Modo Noturno Universal — darkmode.css
+   Ativado quando o content script coloca o atributo
+   [data-modo-noturno="on"] no <html>.
+   As variáveis --mn-* são definidas pelo content script
+   a partir das preferências salvas.
+   ============================================================ */
+
+html[data-modo-noturno="on"] {
+  /* Inverte a página inteira e gira o matiz 180° para
+     preservar as cores originais (azul continua azul). */
+  filter:
+    invert(1)
+    hue-rotate(180deg)
+    brightness(var(--mn-brilho, 1))
+    contrast(var(--mn-contraste, 1))
+    sepia(var(--mn-sepia, 0)) !important;
+  background-color: #fff !important; /* vira preto após o invert */
+}
+
+/* Re-inverte mídia para que fotos, vídeos e canvas
+   apareçam com as cores reais, não em "negativo". */
+html[data-modo-noturno="on"] img,
+html[data-modo-noturno="on"] picture,
+html[data-modo-noturno="on"] video,
+html[data-modo-noturno="on"] canvas,
+html[data-modo-noturno="on"] svg image,
+html[data-modo-noturno="on"] embed,
+html[data-modo-noturno="on"] object,
+html[data-modo-noturno="on"] iframe[src*="youtube"],
+html[data-modo-noturno="on"] iframe[src*="vimeo"],
+html[data-modo-noturno="on"] [style*="background-image"] {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+
+/* Evita dupla re-inversão em mídia aninhada
+   (ex.: <img> dentro de elemento com background-image). */
+html[data-modo-noturno="on"] [style*="background-image"] img,
+html[data-modo-noturno="on"] [style*="background-image"] video,
+html[data-modo-noturno="on"] [style*="background-image"] canvas {
+  filter: none !important;
+}
+
+/* Sombras invertidas ficam com "brilho branco" estranho —
+   suaviza em elementos comuns de cartão. */
+html[data-modo-noturno="on"] * {
+  scrollbar-color: #555 #ddd;
+}
