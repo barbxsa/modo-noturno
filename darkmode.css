@@ -6,7 +6,7 @@
    a partir das preferências salvas.
    ============================================================ */
 
-html[data-modo-noturno="on"] {
+html[data-modo-noturno="on"]{
   /* Inverte a página inteira e gira o matiz 180° para
      preservar as cores originais (azul continua azul). */
   filter:
