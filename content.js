@@ -11,7 +11,7 @@
     brilho: 100,     // %
     contraste: 100,  // %
     sepia: 0,        // %
-    sitesDesativados: {} // { "exemplo.com": true }
+    sitesDesativados: {} 
   };
 
   let config = { ...PADROES };
